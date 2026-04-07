@@ -1,0 +1,128 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="fw-800 mb-1">🛠 System Analytics</h1>
+            <p class="text-muted fw-medium">Real-time overview of the EcoSkillMatch ecosystem</p>
+        </div>
+        <button class="btn btn-outline-success rounded-pill fw-bold px-4">
+            <i class="bi bi-download me-2"></i> Export Report
+        </button>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-6 col-md-3">
+            <div class="dashboard-card border-top border-4 border-success">
+                <h6 class="text-uppercase small fw-800 text-muted letter-spacing-1">Total Users</h6>
+                <h2 class="display-6 fw-800 text-dark mb-0">{{ total_users }}</h2>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="dashboard-card border-top border-4 border-primary">
+                <h6 class="text-uppercase small fw-800 text-muted letter-spacing-1">Green Jobs</h6>
+                <h2 class="display-6 fw-800 text-dark mb-0">{{ total_jobs }}</h2>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="dashboard-card border-top border-4 border-warning">
+                <h6 class="text-uppercase small fw-800 text-muted letter-spacing-1">Courses</h6>
+                <h2 class="display-6 fw-800 text-dark mb-0">{{ total_courses }}</h2>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="dashboard-card border-top border-4 border-danger">
+                <h6 class="text-uppercase small fw-800 text-muted letter-spacing-1">Startups</h6>
+                <h2 class="display-6 fw-800 text-dark mb-0">{{ total_startups }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="dashboard-card p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-800 mb-0">📈 Skills Distribution</h5>
+                    <span class="badge bg-light text-dark border fw-bold">User Talent Pool</span>
+                </div>
+                <div style="position: relative; height: 350px;">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="dashboard-card p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-800 mb-0">📍 Regional Density</h5>
+                    <span class="badge bg-light text-dark border fw-bold">Geo Metrics</span>
+                </div>
+                <div style="position: relative; height: 350px;">
+                    <canvas id="locationChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Universal Chart Config for Professional Look
+    const chartDefaults = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false }
+        }
+    };
+
+    // Skills Bar Chart
+    new Chart(document.getElementById("skillsChart"), {
+        type: "bar",
+        data: {
+            labels: {{ skill_labels | tojson }},
+            datasets: [{
+                label: "Users",
+                data: {{ skill_counts | tojson }},
+                backgroundColor: "#059669",
+                borderRadius: 12,
+                hoverBackgroundColor: "#064e3b"
+            }]
+        },
+        options: {
+            ...chartDefaults,
+            scales: {
+                y: { grid: { display: false }, beginAtZero: true },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Location Pie Chart
+    new Chart(document.getElementById("locationChart"), {
+        type: "doughnut", // Switched to Doughnut for a more modern look
+        data: {
+            labels: {{ location_labels | tojson }},
+            datasets: [{
+                data: {{ location_counts | tojson }},
+                backgroundColor: ["#059669", "#10b981", "#3b82f6", "#f59e0b", "#ef4444"],
+                borderWidth: 0,
+                hoverOffset: 20
+            }]
+        },
+        options: {
+            ...chartDefaults,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: { usePointStyle: true, padding: 20, font: { weight: 'bold' } }
+                }
+            },
+            cutout: '70%' // Creates the modern doughnut hole
+        }
+    });
+</script>
+
+{% endblock %}

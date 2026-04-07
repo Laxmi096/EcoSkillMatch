@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+        <div>
+            <h1 class="fw-800 mb-1">📘 Upskill for the Future</h1>
+            <p class="text-muted fw-medium">Industry-recognized certifications in sustainability and green tech</p>
+        </div>
+        <div class="bg-primary bg-opacity-10 px-4 py-2 rounded-pill border border-primary border-opacity-25">
+            <span class="text-primary fw-bold"><i class="bi bi-mortarboard-fill me-1"></i> Verified Learning Paths</span>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for c in courses %}
+        <div class="col-lg-4 col-md-6">
+            <div class="dashboard-card h-100 border-0 shadow-sm d-flex flex-column" style="background: #fff;">
+                
+                <div class="mb-4">
+                    <span class="badge rounded-pill px-3 py-2 fw-800 text-uppercase" 
+                          style="background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; font-size: 0.7rem;">
+                        {{ c.platform }}
+                    </span>
+                </div>
+
+                <h4 class="fw-800 mb-2 text-dark" style="min-height: 3.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                    {{ c.title }}
+                </h4>
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-light p-2 rounded-circle me-2">
+                        <i class="bi bi-bank text-muted"></i>
+                    </div>
+                    <p class="text-muted fw-bold small mb-0">{{ c.provider }}</p>
+                </div>
+
+                <div class="mt-auto">
+                    <div class="p-3 rounded-4 mb-4" style="background: #f8fafc; border: 1px dashed #cbd5e1;">
+                        <div class="row text-center">
+                            <div class="col-6 border-end">
+                                <label class="small text-muted text-uppercase d-block fw-800" style="font-size: 0.6rem;">Duration</label>
+                                <span class="fw-bold text-dark small"><i class="bi bi-clock-history me-1 text-primary"></i> {{ c.duration }}</span>
+                            </div>
+                            <div class="col-6">
+                                <label class="small text-muted text-uppercase d-block fw-800" style="font-size: 0.6rem;">Level</label>
+                                <span class="fw-bold text-dark small"><i class="bi bi-bar-chart-fill me-1 text-primary"></i> Professional</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="{{ c.link }}" target="_blank" 
+                       class="btn btn-primary w-100 py-3 fw-800 rounded-pill shadow-sm btn-hover-grow"
+                       style="background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%); border: none;">
+                        Enroll Now <i class="bi bi-arrow-right-circle ms-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 py-5 text-center">
+            <i class="bi bi-journal-x fs-1 text-muted mb-3 d-block"></i>
+            <h4 class="fw-800">New Courses Loading</h4>
+            <p class="text-muted">We're indexing new sustainability modules right now.</p>
+        </div>
+        <a href="{{ course.link }}" target="_blank" class="btn btn-success">
+    Enroll Now
+</a>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

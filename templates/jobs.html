@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- RESUME STATUS -->
+<div class="alert alert-success small">
+  📄 Based on your uploaded resume:
+  <b>{{ resume_skills or "None" }}</b><br>
+  🤖 AI Engine Active
+</div>
+
+<div class="container py-4">
+
+  <!-- HEADER -->
+  <div class="mb-5 d-flex justify-content-between align-items-end">
+    <div>
+      <h1 class="fw-bold text-white mb-1">🌱 AI-Matched Green Jobs</h1>
+      <p class="text-light opacity-75 mb-0">
+        Smart recommendations based on your resume
+      </p>
+    </div>
+
+    <span class="badge bg-success px-3 py-2 rounded-pill shadow-sm">
+      <i class="bi bi-cpu-fill me-1"></i> AI Active
+    </span>
+  </div>
+
+  <!-- JOB CARDS -->
+  <div class="row g-4">
+
+    {% for job in green_jobs %}
+    <div class="col-xl-4 col-md-6">
+      <div class="dashboard-card h-100 p-4 d-flex flex-column
+                  bg-dark bg-opacity-75 text-white rounded-4 shadow-lg">
+
+        <!-- TOP -->
+        <div class="d-flex justify-content-between align-items-start mb-4">
+          <div class="p-3 rounded-4 bg-success bg-opacity-25">
+            <i class="bi bi-briefcase-fill fs-3 text-success"></i>
+          </div>
+
+          <div class="text-end">
+            <h2 class="fw-bold mb-0
+              {% if job.match_percent >= 70 %}
+                text-success
+              {% elif job.match_percent >= 40 %}
+                text-warning
+              {% else %}
+                text-danger
+              {% endif %}
+            ">
+              {{ job.match_percent }}%
+            </h2>
+            <small class="text-uppercase text-light opacity-75">
+              Resume Match
+            </small>
+          </div>
+        </div>
+
+        <!-- TITLE -->
+        <h4 class="fw-bold mb-1">{{ job.title }}</h4>
+        <p class="text-success fw-semibold small mb-4">
+          {{ job.company }} • {{ job.location }}
+        </p>
+
+        <!-- SKILLS -->
+        <div class="p-3 mb-4 rounded-3 bg-black bg-opacity-50">
+
+          {% if job.matched_skills %}
+          <div class="mb-3">
+            <label class="small fw-bold text-uppercase text-light mb-2 d-block">
+              ✅ Skills You Have
+            </label>
+            <div class="d-flex flex-wrap gap-2">
+              {% for skill in job.matched_skills %}
+              <span class="badge bg-success text-white fw-bold px-3 py-2 rounded-pill shadow-sm">
+                {{ skill }}
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if job.missing_skills %}
+          <div>
+            <label class="small fw-bold text-uppercase text-light mb-2 d-block">
+              ❌ Missing for 100% Match
+            </label>
+            <div class="d-flex flex-wrap gap-2">
+              {% for skill in job.missing_skills %}
+              <span class="badge bg-warning text-dark fw-bold px-3 py-2 rounded-pill shadow-sm">
+                {{ skill }}
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if job.missing_skills %}
+          <a href="/chatbot?skill={{ job.missing_skills[0] }}"
+             class="btn btn-sm btn-outline-info mt-2 rounded-pill">
+             Learn with AI
+          </a>
+          {% endif %}
+
+        </div>
+
+        <!-- AI ADVICE + APPLY -->
+        {% if job.advice %}
+        <div class="mt-auto pt-3 border-top border-light border-opacity-25">
+
+          <p class="small text-light opacity-75 mb-3">
+            <i class="bi bi-robot me-2 text-info"></i>
+            {{ job.advice[0] }}
+          </p>
+
+          <div class="d-flex gap-2">
+
+            {% if job.match_percent >= 40 %}
+              <a href="{{ job.link }}" target="_blank"
+                 class="btn btn-success flex-grow-1 py-3 fw-bold rounded-pill shadow-sm">
+                🚀 Apply Now
+              </a>
+
+              <a href="/interview-prep/{{ job.id }}"
+                 class="btn btn-outline-light py-3 px-4 rounded-pill shadow-sm border-opacity-25"
+                 title="Practice with AI">
+                <i class="bi bi-robot fs-5"></i>
+              </a>
+
+            {% else %}
+              <button class="btn btn-secondary w-100 py-3 fw-bold rounded-pill" disabled>
+                Improve Skills to Apply
+              </button>
+            {% endif %}
+
+          </div>
+
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    {% else %}
+      <div class="col-12 text-center text-light opacity-75">
+        No matching green jobs yet 🌿
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}

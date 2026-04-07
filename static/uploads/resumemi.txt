@@ -1,0 +1,103 @@
+Name: Minal Patil
+Email: Minalpatil@email.com
+
+Location: Mumbai, India
+
+🎯 Professional Summary
+
+Solar Energy Data Analyst with strong experience in Python, Solar Energy Systems, Data Analysis, Excel, and Power BI.
+Passionate about renewable energy, sustainability, and climate-focused analytics to improve energy efficiency and environmental impact.
+
+🛠 Technical Skills
+
+Python
+
+Solar Energy Analytics
+
+Renewable Energy Systems
+
+Energy Data Analysis
+
+Microsoft Excel (Advanced)
+
+Power BI (Dashboards & Reporting)
+
+Sustainability Metrics
+
+Climate Data Analysis
+
+SQL
+
+Data Visualization
+
+💼 Work Experience
+Solar Energy Data Analyst
+
+Tata Power Renewables – Mumbai
+2022 – Present
+
+Analyzed solar energy production data using Python and Excel
+
+Built Power BI dashboards for solar performance monitoring
+
+Worked on energy efficiency and sustainability reporting
+
+Conducted climate and environmental impact analysis
+
+Improved solar output forecasting accuracy by 18%
+
+Environmental Data Analyst
+
+Infosys – Bangalore
+2020 – 2022
+
+Analyzed climate and sustainability datasets
+
+Used Python for data analysis and automation
+
+Created Excel and Power BI reports for stakeholders
+
+Supported renewable energy and environmental projects
+
+📊 Projects
+Solar Energy Optimization Project
+
+Python-based solar energy data analysis
+
+Climate impact assessment
+
+Sustainability metrics reporting
+
+Renewable Energy Dashboard
+
+Power BI dashboard for energy analytics
+
+Excel-based data modeling
+
+Environmental KPI tracking
+
+🎓 Education
+
+B.Tech – Renewable Energy Engineering
+National Institute of Technology, India
+
+🌱 Certifications
+
+Renewable Energy Analytics – Coursera
+
+Data Analysis with Python – IBM
+
+Sustainability & Climate Studies – edX
+
+🏆 Keywords for AI Matching (VERY IMPORTANT)
+
+Python
+Solar
+Energy
+Excel
+Power BI
+Data
+Analysis
+Climate
+Sustainability
+Renewable

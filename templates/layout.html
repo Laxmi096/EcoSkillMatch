@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSkillMatch</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        /* --- SLIGHTLY LIGHTER PROFESSIONAL THEME --- */
+        body {
+            /* Changed from #050a15 to a lighter slate #1e293b */
+            background-color: #1e293b !important; 
+            /* Softer, more vibrant gradient */
+            background-image: radial-gradient(circle at top left, #065f46 0%, #1e293b 80%) !important;
+            background-attachment: fixed;
+            color: #f1f5f9 !important; /* Brighter slate-white text */
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        .navbar {
+            /* Lighter, more transparent frosted glass */
+            background: rgba(30, 41, 59, 0.7) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar-brand {
+            color: #34d399 !important; /* Bright Emerald */
+        }
+
+        .nav-link {
+            color: rgba(241, 245, 249, 0.9) !important;
+        }
+
+        .nav-link:hover {
+            color: #10b981 !important;
+        }
+
+        /* Glass Cards: Slightly lighter and more opaque for readability */
+        .dashboard-card, .glass-card-v2 {
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 24px;
+        }
+
+        /* Matching percentages and high-priority text */
+        .text-success {
+            color: #10b981 !important;
+        }
+
+        .text-muted {
+            color: #cbd5e1 !important; /* Light slate gray */
+        }
+
+        /* Buttons with a more vibrant emerald pop */
+        .btn-success {
+            background-color: #10b981 !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="/dashboard">
+            <i class="bi bi-leaf-fill me-2"></i> EcoSkillMatch
+        </a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon" style="filter: invert(0.8);"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center gap-2">
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium" href="/jobs">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium" href="/courses">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium" href="/edit-profile">Profile</a>
+                </li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-outline-danger btn-sm px-3 rounded-pill fw-bold" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Floating Chat Button -->
+<div id="chatButton" onclick="toggleChat()">💬</div>
+
+<!-- Chat Window -->
+<div id="chatWindow">
+    <div class="chat-header">
+        EcoSkill AI Assistant
+        <span onclick="toggleChat()" style="float:right; cursor:pointer;">✖</span>
+    </div>
+
+    <div id="chatBox" class="chat-body"></div>
+
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleKey(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<style>
+#chatButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: green;
+    color: white;
+    font-size: 22px;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#chatWindow {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+}
+
+.chat-header {
+    background: green;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chat-body {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+    flex: 1;
+    border: none;
+    padding: 8px;
+}
+
+.chat-input button {
+    border: none;
+    background: green;
+    color: white;
+    padding: 8px 12px;
+}
+</style>
+
+<script>
+function toggleChat() {
+    let chat = document.getElementById("chatWindow");
+    chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+}
+
+function sendMessage() {
+    let input = document.getElementById("userInput");
+    let message = input.value.trim();
+    if (!message) return;
+
+    let chatBox = document.getElementById("chatBox");
+
+    chatBox.innerHTML += `<div><b>You:</b> ${message}</div>`;
+    chatBox.innerHTML += `<div id="loading">AI is typing...</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: message})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("loading").remove();
+        chatBox.innerHTML += `<div style="color:green;"><b>AI:</b> ${data.reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    input.value = "";
+}
+
+function handleKey(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+}
+</script>
+
+</body>
+</html>

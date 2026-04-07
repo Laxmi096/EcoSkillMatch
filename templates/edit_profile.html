@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            
+            <div class="text-center mb-5">
+                <div class="d-inline-block p-3 rounded-circle mb-3" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2);">
+                    <i class="bi bi-person-gear text-success display-4"></i>
+                </div>
+                <h1 class="fw-800 text-white display-6">Profile Settings</h1>
+                <p class="text-light opacity-50">Keep your expertise and location up to date for better AI matching.</p>
+            </div>
+
+            <div class="p-5 shadow-lg" style="background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(15px); border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <form action="/edit-profile" method="POST">
+                    
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-uppercase tracking-wider opacity-50">Full Name</label>
+                        <input type="text" class="form-control form-control-lg border-0" value="{{ user.name }}" disabled 
+                               style="background: rgba(15, 23, 42, 0.5); color: #94a3b8; border-radius: 16px;">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-uppercase tracking-wider text-success">Expertise & Skills</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0" style="background: rgba(15, 23, 42, 0.5); color: #10b981; border-radius: 16px 0 0 16px;">
+                                <i class="bi bi-tags-fill"></i>
+                            </span>
+                            <textarea name="skills" class="form-control form-control-lg border-0" rows="3" 
+                                      placeholder="e.g. Python, Solar, Climate Analysis..." required
+                                      style="background: rgba(15, 23, 42, 0.5); color: #fff; border-radius: 0 16px 16px 0;">{{ user.skills }}</textarea>
+                        </div>
+                        <div class="form-text text-light opacity-50 small mt-2">
+                            <i class="bi bi-info-circle me-1"></i> Separate skills with commas. Our AI uses these for job matching.
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="form-label small fw-bold text-uppercase tracking-wider text-success">Preferred Location</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0" style="background: rgba(15, 23, 42, 0.5); color: #10b981; border-radius: 16px 0 0 16px;">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </span>
+                            <input type="text" name="location" class="form-control form-control-lg border-0" 
+                                   value="{{ user.location }}" placeholder="e.g. Mumbai, Remote..." required
+                                   style="background: rgba(15, 23, 42, 0.5); color: #fff; border-radius: 0 16px 16px 0;">
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-success btn-lg w-100 fw-800 rounded-pill shadow-lg transition-hover">
+                                <i class="bi bi-check2-circle me-2"></i> Save Changes
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="/dashboard" class="btn btn-outline-light btn-lg w-100 fw-bold rounded-pill" style="border: 1px solid rgba(255,255,255,0.2);">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="small text-light opacity-25">
+                    Your account is secured with EcoSkillMatch Encryption. <br>
+                    Last Profile Update: <span class="text-white opacity-100">Today</span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

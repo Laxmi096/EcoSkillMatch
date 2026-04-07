@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            
+            <div class="text-center mb-5">
+                <div class="icon-circle mb-3 mx-auto shadow-lg" style="background: rgba(16, 185, 129, 0.1); width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                    <i class="bi bi-robot text-success display-4"></i>
+                </div>
+                <h1 class="fw-800 text-white">AI Interview Coach</h1>
+                <p class="text-muted">Preparing you for: <strong>{{ job.title }}</strong> at {{ job.company }}</p>
+            </div>
+
+            <div class="glass-card-v2 p-5 shadow-lg position-relative overflow-hidden" 
+                 style="background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(20px); border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                
+                <div class="d-flex align-items-center mb-4">
+                    <span class="badge bg-success px-3 py-2 rounded-pill me-3">AI GENERATED</span>
+                    <hr class="flex-grow-1 opacity-10">
+                </div>
+
+                <div class="interview-questions">
+                    {% for question in questions %}
+                    <div class="d-flex mb-4 transition-hover">
+                        <div class="me-3">
+                            <span class="badge rounded-circle bg-success bg-opacity-10 text-success p-3">
+                                {{ loop.index }}
+                            </span>
+                        </div>
+                        <div class="p-4 rounded-4 w-100" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <p class="mb-0 text-white fw-medium leading-relaxed">{{ question }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mt-5 text-center">
+                    <button onclick="window.print()" class="btn btn-outline-light rounded-pill px-4 me-2">
+                        <i class="bi bi-printer me-2"></i> Print Guide
+                    </button>
+                    <a href="/jobs" class="btn btn-success rounded-pill px-4 fw-bold shadow-sm">
+                        Back to Jobs
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="small text-muted fst-italic">
+                    Tip: Record yourself answering these questions to check your body language and tone.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

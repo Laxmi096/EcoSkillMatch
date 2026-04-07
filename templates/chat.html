@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EcoSkill AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #288df3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 400px;
+            background: rgb(22, 115, 215);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .user {
+            text-align: right;
+            color: blue;
+        }
+
+        .bot {
+            text-align: left;
+            color: green;
+        }
+
+        .input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: green;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+
+    <div class="input-area">
+        <input type="text" id="messageInput" placeholder="Type your message..." onkeypress="handleKey(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("messageInput");
+    let message = input.value.trim();
+    if (!message) return;
+
+    let chatBox = document.getElementById("chatBox");
+
+    chatBox.innerHTML += `<div class="message user"><b>You:</b> ${message}</div>`;
+
+    fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: message})
+    })
+    .then(response => response.json())
+    .then(data => {
+        chatBox.innerHTML += `<div class="message bot"><b>AI:</b> ${data.reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    input.value = "";
+}
+
+function handleKey(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Green Opportunities Hub</title>
+    <style>
+        body { font-family: Arial; background: #f4fff6; padding: 20px; }
+        h1 { color: #2e7d32; }
+        h2 { color: #388e3c; }
+        ul { background: #ffffff; padding: 15px; border-radius: 8px; }
+        li { margin: 8px 0; }
+        a { text-decoration: none; color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>🌱 Green Opportunities Hub</h1>
+
+<h2>🌱 Green Jobs</h2>
+<ul>
+    {% for job in green_jobs %}
+        <li>{{ job }}</li>
+    {% endfor %}
+</ul>
+
+<h2>📘 Sustainability Courses</h2>
+<ul>
+    {% for course in courses %}
+        <li>{{ course }}</li>
+    {% endfor %}
+</ul>
+
+<h2>🚀 Eco-Friendly Startup Ideas</h2>
+<ul>
+    {% for startup in startups %}
+        <li>{{ startup }}</li>
+    {% endfor %}
+</ul>
+
+<br>
+<a href="/dashboard">⬅ Back to Dashboard</a>
+
+</body>
+</html>

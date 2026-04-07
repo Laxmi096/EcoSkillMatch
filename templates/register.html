@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="dashboard-card p-4 p-md-5 border-0 shadow-lg" style="border-radius: 30px;">
+                <div class="text-center mb-5">
+                    <div class="bg-success bg-opacity-10 d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 80px; height: 80px;">
+                        <i class="bi bi-tree-fill text-success fs-1"></i>
+                    </div>
+                    <h2 class="fw-bold text-dark">Join the Movement</h2>
+                    <p class="text-muted fw-medium">AI-driven skill matching for green jobs</p>
+                </div>
+
+                <form method="POST" action="/register">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-uppercase text-muted">Full Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="Vsilaxmi" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-uppercase text-muted">Email Address</label>
+                            <input type="email" class="form-control" name="email" placeholder="vsilaxmi@email.com" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-uppercase text-muted">Create Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="••••••••" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-uppercase text-muted">Your Sustainability Skills</label>
+                            <textarea class="form-control" name="skills" rows="3" placeholder="Solar Energy, Python, Data Analysis..." required></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-uppercase text-muted">Primary Location</label>
+                            <select class="form-select form-control" name="location" required>
+                                <option value="" selected disabled>Select your region</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Remote">Remote / Global</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mt-5">
+                            <button type="submit" class="btn btn-success w-100 py-3 fs-5 shadow-sm">
+                                Create My Account
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="text-center mt-5 pt-3 border-top">
+                    <p class="text-muted small mb-0">Already have an account?</p>
+                    <a href="/login" class="text-success fw-bold text-decoration-none">
+                        Sign In to Your Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container mb-5">
+    <div class="profile-card p-5 shadow-lg" style="background: linear-gradient(135deg, #065f46 0%, #1e293b 100%); border-radius: 30px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(52, 211, 153, 0.1); border-radius: 50%;"></div>
+        
+        <div class="row align-items-center position-relative">
+            <div class="col-md-2 text-center mb-3 mb-md-0">
+                <div class="avatar-glow" style="display: inline-block; padding: 5px; background: rgba(16, 185, 129, 0.2); border-radius: 50%;">
+                    <img src="https://ui-avatars.com/api/?name={{ user.name }}&background=f1f5f9&color=065f46&size=120" 
+                         class="rounded-circle border border-4 border-white shadow-sm" alt="Profile">
+                </div>
+            </div>
+            <div class="col-md-6 text-white">
+                <h1 class="display-5 fw-800 mb-1" style="letter-spacing: -1px;">{{ user.name }}</h1>
+                <p class="opacity-75 fs-5 mb-3 d-flex align-items-center">
+                    <i class="bi bi-geo-alt-fill me-2 text-success"></i> {{ user.location or 'Sustainability Professional' }}
+                    <span class="mx-3 opacity-50">|</span>
+                    <i class="bi bi-shield-check-fill me-2 text-success"></i> Eco-Verified
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    {% if user.skills %}
+                        {% for skill in user.skills.split(',') %}
+                        <span class="badge py-2 px-4 fw-bold" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; font-size: 0.85rem; color: #f1f5f9;">
+                            {{ skill.strip().capitalize() }}
+                        </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end mt-4 mt-md-0">
+                <a href="/upload-resume" class="btn btn-light fw-800 px-4 py-3 text-success rounded-4 shadow-sm transition-hover">
+                    <i class="bi bi-magic me-2"></i> AI Resume Scan
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="dashboard-card h-100 p-4 border-0 shadow-sm transition-hover" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;">
+            <div class="d-flex align-items-center mb-4">
+                <div class="icon-box shadow-sm" style="background: rgba(16, 185, 129, 0.15); padding: 15px; border-radius: 18px;">
+                    <i class="bi bi-briefcase-fill fs-3 text-success"></i>
+                </div>
+                <div class="ms-3">
+                    <h5 class="m-0 fw-800 text-white">Green Jobs</h5>
+                    <small class="text-light opacity-50">Personalized for you</small>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-3 rounded-4" style="background: rgba(15, 23, 42, 0.4);">
+                <h2 class="m-0 fw-800 text-success"></h2>
+                <a href="/jobs" class="btn btn-success fw-bold px-4 rounded-3 shadow-sm">View Roles</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="dashboard-card h-100 p-4 border-0 shadow-sm transition-hover" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;">
+            <div class="d-flex align-items-center mb-4">
+                <div class="icon-box shadow-sm" style="background: rgba(37, 99, 235, 0.15); padding: 15px; border-radius: 18px;">
+                    <i class="bi bi-mortarboard-fill fs-3" style="color: #60a5fa;"></i>
+                </div>
+                <div class="ms-3">
+                    <h5 class="m-0 fw-800 text-white">Eco Courses</h5>
+                    <small class="text-light opacity-50">Trending skills</small>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-3 rounded-4" style="background: rgba(15, 23, 42, 0.4);">
+                <h2 class="m-0 fw-800" style="color: #60a5fa;"></h2>
+                <a href="/courses" class="btn btn-primary fw-bold px-4 rounded-3 shadow-sm border-0" style="background: #2563eb;">Start Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="dashboard-card h-100 p-4 border-0 shadow-sm transition-hover" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;">
+            <div class="d-flex align-items-center mb-4">
+                <div class="icon-box shadow-sm" style="background: rgba(245, 158, 11, 0.15); padding: 15px; border-radius: 18px;">
+                    <i class="bi bi-rocket-takeoff-fill fs-3 text-warning"></i>
+                </div>
+                <div class="ms-3">
+                    <h5 class="m-0 fw-800 text-white">Startups</h5>
+                    <small class="text-light opacity-50">Venture Network</small>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-3 rounded-4" style="background: rgba(15, 23, 42, 0.4);">
+                <h2 class="m-0 fw-800 text-warning"></h2>
+                <a href="/startups" class="btn btn-warning fw-bold px-4 rounded-3 shadow-sm text-white border-0" style="background: #d97706;">Connect</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center pb-5">
+    <a href="/admin" class="btn btn-outline-light border-0 rounded-pill px-4 fw-bold shadow-sm py-2" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(5px);">
+        <i class="bi bi-shield-lock-fill text-danger me-2"></i> Administrator Analytics
+    </a>
+</div>
+
+{% endblock %}

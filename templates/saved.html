@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h4 class="mb-3">⭐ Saved Recommendations</h4>
+
+{% for item in items %}
+<div class="card p-3 mb-2 shadow-sm">
+    <strong>{{ item.category }}</strong>
+    <p class="mb-0">{{ item.title }}</p>
+</div>
+{% else %}
+<p>No saved items yet.</p>
+{% endfor %}
+
+{% endblock %}
